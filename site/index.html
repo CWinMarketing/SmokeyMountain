@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Smokey Mountain Racing</title>
+<meta name="description" content="Smokey Mountain Racing — sim racing team: Blue Ridge Racing, Appalachian Mountain Autosport. Events, driver roster, charity races, league schedules.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Barlow:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <div class="logo-row">
+      <div class="sublogo blueridge">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 36 L16 14 L24 28 L30 18 L44 36 Z" fill="none" stroke="#3E7BD6" stroke-width="3" stroke-linejoin="round"/>
+          <circle cx="24" cy="24" r="21" stroke="#3E7BD6" stroke-width="2"/>
+        </svg>
+        <span class="name">Blue Ridge<br>Racing</span>
+      </div>
+
+      <a href="index.html" class="main-logo">
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 48 L22 14 L32 32 L40 20 L60 48 Z" stroke="#FCEE21" stroke-width="3" stroke-linejoin="round" fill="none"/>
+          <path d="M20 48 Q32 34 44 48" stroke="#EC0F9E" stroke-width="3" fill="none"/>
+          <circle cx="24" cy="48" r="4" fill="#EC0F9E"/>
+          <circle cx="40" cy="48" r="4" fill="#EC0F9E"/>
+        </svg>
+        <span class="name">Smokey Mountain<em>Racing</em></span>
+      </a>
+
+      <div class="sublogo appalachian">
+        <span class="name">Appalachian<br>Mountain Autosport</span>
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="24" cy="24" r="21" stroke="#FFFFFF" stroke-width="2"/>
+          <path d="M8 32 L20 16 L28 26 L34 18 L42 32 Z" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+
+    <nav class="pill">
+      <button class="hamburger" id="hamburger" aria-expanded="false">Menu ▾</button>
+      <div class="pill-inner" id="navPill">
+        <a href="index.html" class="current">Home</a>
+        <a href="roster.html">Driver Roster</a>
+        <a href="charity.html">Charity Races</a>
+        <a href="league.html">League Racing</a>
+        <a href="shop.html">Shop</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap stack">
+
+    <div>
+      <h1 class="h1">Events</h1>
+      <div class="grid-2">
+        <div class="card">
+          <h2 class="h2">SMR Charity Races</h2>
+          <div class="media-box">Snowball Derby — Five Flags Speedway</div>
+          <p class="dim">Twice-yearly iRacing charity events — hard racing, bigger cause.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="charity.html">More Info</a>
+            <a class="btn btn-secondary" href="charity.html">Register</a>
+          </div>
+        </div>
+        <div class="card">
+          <h2 class="h2">League Races</h2>
+          <div class="media-box">Multi-truck battle, league competition</div>
+          <p class="dim">Weekly series across Wednesday Night Dash &amp; Spartan Simracing League.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="league.html">Schedules and Info</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="alt">
+      <h1 class="h1" style="margin-bottom:24px;">Team Store</h1>
+      <div class="grid-3">
+        <div class="card">
+          <div class="media-box">SMR Shop Tee</div>
+          <div style="font-weight:700;">SMR Shop</div>
+        </div>
+        <div class="card">
+          <div class="media-box">Blue Ridge Racing Tee</div>
+          <div style="font-weight:700; color:var(--blueridge);">Blue Ridge Racing</div>
+        </div>
+        <div class="card">
+          <div class="media-box">Appalachian Autosport Tee</div>
+          <div style="font-weight:700;">Appalachian Mountain Autosport</div>
+        </div>
+      </div>
+      <div class="center" style="margin-top:20px;">
+        <a class="btn btn-primary" href="shop.html">Shop Now</a>
+      </div>
+    </div>
+
+    <div>
+      <h1 class="h1">Sponsors</h1>
+      <div class="sponsor-grid" id="sponsorGrid"></div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    Smokey Mountain Racing · Blue Ridge Racing · Appalachian Mountain Autosport
+    <div class="social">
+      <a href="shop.html">Shop</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  var sponsors = ["SMR Shop", "James E. Ellis, P.L.S.", "French Broad Water & Fire Rescue",
+    "Spartan Simracing Graphix", "Stadium Scene TV", "Outlier Speed Co.",
+    "AppalachianChillBilly", "NC State Defense Force"];
+  var grid = document.getElementById('sponsorGrid');
+  sponsors.forEach(function (s) {
+    var d = document.createElement('div');
+    d.className = 'sponsor-tile';
+    d.textContent = s;
+    grid.appendChild(d);
+  });
+</script>
+<script src="script.js"></script>
+</body>
+</html>

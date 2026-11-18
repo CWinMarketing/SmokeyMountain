@@ -1,25 +1,26 @@
-# Smokey Mountain Racing — Redesign
+# Smokey Mountain Racing — Site Rebuild
 
-Design/code deliverables for the Wix Studio redesign of
-[smokey-mountain-racing.com](https://www.smokey-mountain-racing.com/).
-
-The site stays on **Wix Studio**. Since Wix doesn't allow a full external codebase to
-replace its editor-managed layout, deliverables here take the form Wix actually
-supports: a reusable custom CSS design system (Wix Custom CSS panel + per-element custom
-classes) plus written implementation guides for the editor-level changes that can't be
-scripted.
+**Current direction:** migrating off Wix to a self-hosted static site on Cloudflare Pages,
+with merch checkout handled by a Printify Pop-up Store. See `docs/cloudflare-pages-setup.md`
+to deploy and go live.
 
 ## Contents
 
-- `design-system/smr-custom.css` — palette, typography, buttons, and card styles as
-  reusable custom classes.
-- `docs/wix-studio-implementation-guide.md` — step-by-step instructions for applying the
-  design system and fixing layout bugs, page by page.
+- `site/` — the new static site (plain HTML/CSS/JS, no build step). Deploy this to
+  Cloudflare Pages.
+- `docs/cloudflare-pages-setup.md` — how to deploy the site and cut the domain over from Wix.
 
 ## Status
 
-**Phase 1 (in progress):** layout, contrast, and responsive fixes for Home and Driver
-Roster.
+**In progress:** core pages (Home, Driver Roster, Charity Races, League Racing, Shop)
+built with placeholder images and real site copy. Still needed before launch:
+- Real photos/logos exported from Wix (or original source files) dropped into `site/assets/`.
+- The real Printify Pop-up Store URL in `site/shop.html`.
+- Testing on the `*.pages.dev` preview URL before DNS cutover.
 
-**Phase 2 (later):** Charity Races / League Racing pages, replacing schedule screenshots
-with real tables, new features.
+## Archived: Wix Studio redesign (superseded)
+
+- `design-system/smr-custom.css` and `docs/wix-studio-implementation-guide.md` were built
+  for an earlier plan to redesign the site in place on Wix Studio. Kept for reference in
+  case the Wix site needs touch-ups before the new site goes live, but no longer the
+  primary direction.

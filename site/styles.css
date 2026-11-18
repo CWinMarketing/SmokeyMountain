@@ -1,0 +1,287 @@
+/* ============================================================
+   SMOKEY MOUNTAIN RACING — SITE STYLESHEET
+   Shared across every page. Dark racing-neon theme (deliberate,
+   single theme — matches existing team branding).
+   ============================================================ */
+
+:root {
+  --bg: #0A0A0C;
+  --surface: #17171B;
+  --surface-2: #1F1F24;
+  --pink: #EC0F9E;
+  --yellow: #FCEE21;
+  --text: #E8E8E8;
+  --dim: #A3A3A8;
+  --blueridge: #3E7BD6;
+  --appalachian: #FFFFFF;
+  --border: #2A2A30;
+  --maxw: 1120px;
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Barlow', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; }
+img { max-width: 100%; display: block; }
+
+h1, h2, h3, .brand {
+  font-family: 'Orbitron', 'Arial Narrow', sans-serif;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.wrap {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ---------------- Header ---------------- */
+header.site {
+  padding-block: 24px 16px;
+}
+
+.logo-row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 16px;
+  max-width: 100%;
+}
+
+.sublogo { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.sublogo.right { justify-content: flex-end; }
+.sublogo svg { flex-shrink: 0; width: 38px; height: 38px; }
+.sublogo .name {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  font-size: clamp(10px, 2.2vw, 14px);
+  line-height: 1.15;
+}
+.sublogo.blueridge .name { color: var(--blueridge); }
+.sublogo.appalachian .name { color: var(--appalachian); }
+.sublogo.appalachian { text-align: right; }
+
+.main-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  text-decoration: none;
+}
+.main-logo svg { width: 56px; height: 56px; }
+.main-logo .name {
+  font-size: clamp(16px, 4vw, 24px);
+  color: var(--pink);
+  letter-spacing: 0.03em;
+  text-align: center;
+}
+.main-logo .name em { color: var(--yellow); font-style: normal; display: block; }
+
+@media (max-width: 640px) {
+  .logo-row { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+  .sublogo.right { justify-content: center; text-align: center; }
+}
+
+/* ---------------- Nav ---------------- */
+nav.pill { display: flex; justify-content: center; margin-top: 18px; }
+.pill-inner {
+  background: var(--pink);
+  border: 2px solid var(--yellow);
+  border-radius: 8px;
+  display: flex;
+  overflow: hidden;
+}
+.pill-inner a {
+  display: block;
+  color: #fff;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  padding: 10px 18px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.pill-inner a.current {
+  color: var(--yellow);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.hamburger { display: none; }
+
+@media (max-width: 560px) {
+  .pill-inner { display: none; flex-direction: column; width: 100%; }
+  .pill-inner.open { display: flex; }
+  nav.pill { flex-direction: column; align-items: center; }
+  .hamburger {
+    display: block;
+    background: var(--pink);
+    border: 2px solid var(--yellow);
+    color: var(--yellow);
+    font-family: 'Barlow', sans-serif;
+    font-weight: 700;
+    border-radius: 8px;
+    padding: 10px 20px;
+    margin-bottom: 8px;
+    cursor: pointer;
+  }
+  .pill-inner a { text-align: center; }
+}
+
+/* ---------------- Typography ---------------- */
+main { display: block; padding-block: 40px; }
+
+.h1 {
+  color: var(--pink);
+  font-size: clamp(26px, 5vw, 38px);
+  letter-spacing: 0.04em;
+  text-align: center;
+  margin-bottom: 26px;
+}
+.h2 {
+  color: var(--yellow);
+  font-size: clamp(17px, 3vw, 21px);
+  letter-spacing: 0.03em;
+  margin-bottom: 14px;
+}
+p, li { font-size: 16px; line-height: 1.65; color: var(--text); }
+.dim { color: var(--dim); font-size: 14px; line-height: 1.55; }
+
+/* ---------------- Buttons ---------------- */
+.btn {
+  display: inline-block;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 13px;
+  padding: 11px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  border: 2px solid transparent;
+}
+.btn-primary {
+  background: var(--pink);
+  border-color: var(--yellow);
+  color: #fff;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(236,15,158,.45); }
+.btn-secondary { background: transparent; border-color: var(--pink); color: var(--pink); }
+
+/* ---------------- Cards / grids ---------------- */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px;
+}
+
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 18px; }
+.grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 18px; }
+
+.media-box {
+  aspect-ratio: 16/9;
+  border-radius: 8px;
+  background: repeating-linear-gradient(135deg, var(--surface-2) 0 10px, #26262d 10px 20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--dim);
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 8px;
+  margin-bottom: 14px;
+}
+
+.card .actions { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+
+.sponsor-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 14px; }
+.sponsor-tile {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 10px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--dim);
+  font-weight: 600;
+}
+
+.center { text-align: center; }
+.alt { background: var(--surface); border-radius: 14px; padding: 36px 24px; }
+.stack { display: flex; flex-direction: column; gap: 44px; }
+
+/* ---------------- Driver roster ---------------- */
+.team-block { margin-bottom: 8px; }
+.team-block .h2 { text-align: center; }
+.driver-card { text-align: center; }
+.driver-card .num { font-family: 'Orbitron', sans-serif; font-size: 26px; color: var(--pink); }
+.driver-card .media-box { aspect-ratio: 4/3; margin-bottom: 10px; }
+.driver-card .dname { font-family: 'Orbitron', sans-serif; font-size: 13px; letter-spacing: 0.02em; }
+.team-blueridge .h2 { color: var(--blueridge); }
+.team-appalachian .h2 { color: var(--appalachian); }
+
+/* ---------------- Charity ---------------- */
+.charity-layout {
+  display: grid;
+  grid-template-columns: 1fr minmax(0,560px) 1fr;
+  gap: 24px;
+  align-items: center;
+}
+@media (max-width: 800px) { .charity-layout { grid-template-columns: 1fr; } }
+.charity-layout ul { padding-left: 18px; margin: 10px 0; }
+.charity-layout li { margin-bottom: 6px; }
+
+/* ---------------- League / schedule table ---------------- */
+.league-cols { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 24px; }
+@media (max-width: 760px) { .league-cols { grid-template-columns: 1fr; } }
+.table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 8px; }
+table.sched { border-collapse: collapse; width: 100%; min-width: 360px; font-size: 13px; }
+table.sched th, table.sched td {
+  padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--border); white-space: nowrap;
+}
+table.sched thead th {
+  background: var(--surface-2); color: var(--yellow);
+  text-transform: uppercase; font-size: 11px; letter-spacing: 0.04em;
+}
+table.sched tbody tr:last-child td { border-bottom: none; }
+
+.driverchip-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+.driverchip {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 999px; padding: 6px 12px; font-size: 12px;
+}
+.links-col { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+
+/* ---------------- Shop ---------------- */
+.shop-hero {
+  text-align: center;
+  padding: 40px 20px;
+}
+.shop-hero .btn-primary { font-size: 16px; padding: 16px 36px; margin-top: 12px; }
+
+/* ---------------- Footer ---------------- */
+footer.site {
+  border-top: 1px solid var(--border);
+  margin-top: 20px;
+  padding-block: 28px 40px;
+  text-align: center;
+  color: var(--dim);
+  font-size: 13px;
+}
+footer.site .social { margin-top: 10px; display: flex; justify-content: center; gap: 14px; }
+footer.site .social a { color: var(--dim); font-size: 12px; text-decoration: underline; }
