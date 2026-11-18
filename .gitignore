@@ -1,0 +1,13 @@
+node_modules/
+.env
+.env.local
+!.env.example
+dist/
+build/
+.next/
+.medusa/
+*.log
+.DS_Store
+.turbo/
+coverage/
+.cache/
