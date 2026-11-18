@@ -11,6 +11,11 @@ import { notFound } from "next/navigation"
 import { HttpTypes } from "@medusajs/types"
 
 import ProductActionsWrapper from "./product-actions-wrapper"
+import DivisionThemeProvider from "@modules/divisions/components/division-theme-provider"
+import { isDivision } from "@modules/divisions/theme-config"
+import { getSelectedVehicle } from "@lib/data/fitment-cookie"
+import FitConfirmationBanner from "@modules/fitment/components/fit-confirmation-banner"
+import SpecSheet from "@modules/products/components/spec-sheet"
 
 type ProductTemplateProps = {
   product: HttpTypes.StoreProduct
@@ -19,17 +24,25 @@ type ProductTemplateProps = {
   images: HttpTypes.StoreProductImage[]
 }
 
-const ProductTemplate: React.FC<ProductTemplateProps> = ({
+async function ProductTemplate({
   product,
   region,
   countryCode,
   images,
-}) => {
+}: ProductTemplateProps) {
   if (!product || !product.id) {
     return notFound()
   }
 
-  return (
+  const division = product.categories
+    ?.map((c: any) => c.metadata?.division)
+    .find((d: unknown) => isDivision(d))
+
+  const selectedVehicle = isDivision(division) && division === "racing"
+    ? await getSelectedVehicle()
+    : null
+
+  const content = (
     <>
       <div
         className="content-container  flex flex-col small:flex-row small:items-start py-6 relative"
@@ -43,6 +56,15 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
           <ImageGallery images={images} />
         </div>
         <div className="flex flex-col small:sticky small:top-48 small:py-0 small:max-w-[300px] w-full py-8 gap-y-12">
+          {isDivision(division) && division === "racing" && (
+            <FitConfirmationBanner
+              productId={product.id}
+              initialVehicle={selectedVehicle}
+            />
+          )}
+          {isDivision(division) && division === "sim" && (
+            <SpecSheet metadata={product.metadata} />
+          )}
           <ProductOnboardingCta />
           <Suspense
             fallback={
@@ -67,6 +89,12 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
       </div>
     </>
   )
+
+  if (isDivision(division)) {
+    return <DivisionThemeProvider division={division}>{content}</DivisionThemeProvider>
+  }
+
+  return content
 }
 
 export default ProductTemplate

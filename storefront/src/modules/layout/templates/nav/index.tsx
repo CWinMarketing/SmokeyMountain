@@ -31,12 +31,21 @@ export default async function Nav() {
               className="txt-compact-xlarge-plus hover:text-ui-fg-base uppercase"
               data-testid="nav-store-link"
             >
-              Medusa Store
+              Win-R Automotive
             </LocalizedClientLink>
           </div>
 
           <div className="flex items-center gap-x-6 h-full flex-1 basis-0 justify-end">
             <div className="hidden small:flex items-center gap-x-6 h-full">
+              <LocalizedClientLink className="hover:text-ui-fg-base" href="/racing">
+                Racing
+              </LocalizedClientLink>
+              <LocalizedClientLink className="hover:text-ui-fg-base" href="/collective">
+                Collective
+              </LocalizedClientLink>
+              <LocalizedClientLink className="hover:text-ui-fg-base" href="/sim">
+                Sim
+              </LocalizedClientLink>
               <LocalizedClientLink
                 className="hover:text-ui-fg-base"
                 href="/account"

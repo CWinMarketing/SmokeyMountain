@@ -56,7 +56,12 @@ services:
     ports:
       - "8000:8000"
     environment:
-      NEXT_PUBLIC_MEDUSA_BACKEND_URL: http://backend:9000
+      # Server-side (Next.js server components/actions, inside the Docker
+      # network): reaches the backend container by its service name.
+      MEDUSA_BACKEND_URL: http://backend:9000
+      # Client-side (runs in the browser): must be host-reachable, not the
+      # internal Docker hostname - the two differ on purpose.
+      NEXT_PUBLIC_MEDUSA_BACKEND_URL: http://localhost:9000
       NEXT_PUBLIC_BASE_URL: ${NEXT_PUBLIC_BASE_URL:-http://localhost:8000}
       NEXT_PUBLIC_STRIPE_KEY: ${NEXT_PUBLIC_STRIPE_KEY:-}
       NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY: ${NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY:-}

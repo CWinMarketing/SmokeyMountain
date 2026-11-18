@@ -8,8 +8,13 @@ import { SortOptions } from "@modules/store/components/refinement-list/sort-prod
 import PaginatedProducts from "@modules/store/templates/paginated-products"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { HttpTypes } from "@medusajs/types"
+import DivisionThemeProvider from "@modules/divisions/components/division-theme-provider"
+import { isDivision } from "@modules/divisions/theme-config"
+import { getSelectedVehicle } from "@lib/data/fitment-cookie"
+import { getProductsForVehicle } from "@modules/fitment/lib/fitment-client"
+import VehicleSelector from "@modules/fitment/components/vehicle-selector"
 
-export default function CategoryTemplate({
+export default async function CategoryTemplate({
   category,
   sortBy,
   page,
@@ -36,7 +41,27 @@ export default function CategoryTemplate({
 
   getParents(category)
 
-  return (
+  const division = (category.metadata as any)?.division
+  const isRacing = isDivision(division) && division === "racing"
+
+  let fitmentProductIds: string[] | undefined
+  let selectedVehicle: { id: string; label: string } | null = null
+
+  if (isRacing) {
+    selectedVehicle = await getSelectedVehicle()
+    if (selectedVehicle) {
+      const { fits, universal } = await getProductsForVehicle(
+        selectedVehicle.id
+      )
+      const combined = [...fits, ...universal]
+      // Guard against an empty result being treated as "no id filter" by
+      // the products endpoint - force a zero-result match instead of
+      // silently falling back to showing everything in the category.
+      fitmentProductIds = combined.length > 0 ? combined : ["__no_fitment_match__"]
+    }
+  }
+
+  const content = (
     <div
       className="flex flex-col small:flex-row small:items-start py-6 content-container"
       data-testid="category-container"
@@ -64,6 +89,14 @@ export default function CategoryTemplate({
             <p>{category.description}</p>
           </div>
         )}
+        {isRacing && (
+          <div className="mb-8">
+            <VehicleSelector
+              initialLabel={selectedVehicle?.label ?? null}
+              syncToUrl
+            />
+          </div>
+        )}
         {category.category_children && (
           <div className="mb-8 text-base-large">
             <ul className="grid grid-cols-1 gap-2">
@@ -88,10 +121,17 @@ export default function CategoryTemplate({
             sortBy={sort}
             page={pageNumber}
             categoryId={category.id}
+            productsIds={fitmentProductIds}
             countryCode={countryCode}
           />
         </Suspense>
       </div>
     </div>
   )
+
+  if (isDivision(division)) {
+    return <DivisionThemeProvider division={division}>{content}</DivisionThemeProvider>
+  }
+
+  return content
 }
